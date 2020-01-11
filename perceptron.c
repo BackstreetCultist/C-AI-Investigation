@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include "perceptron.h"
 
-int perceptron(int x1[4], int x2[4], int T[4]){
+int O[4] = {0,0,0,0};
+
+int * perceptron(int x1[4], int x2[4], int T[4]){
 	int pass; //1 = pass, 0 = fail, reset to 1 each time
 	float y = 0.5;
-	int O[4] = {0,0,0,0};
 	float w1 = 0;
 	float w2 = 0;
 	double LR = 0.1;
@@ -43,5 +44,5 @@ int perceptron(int x1[4], int x2[4], int T[4]){
 		}
 		
 	} while (pass == 0);
-	return 0;
+	return O;
 }
