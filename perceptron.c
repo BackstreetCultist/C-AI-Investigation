@@ -9,7 +9,7 @@ void perceptron(int x1[4], int x2[4], int T[4], int O[4]){
 	float w2 = 0;
 	double LR = 0.1;
 	
-	printf("Perceptron in\n");
+	printf("PERCEPTRON: Perceptron in\n");
 	do {
 		pass = 1;
 		printf("\n\nNEW CYCLE\n");
@@ -45,7 +45,7 @@ void perceptron(int x1[4], int x2[4], int T[4], int O[4]){
 		}
 		
 	} while (pass == 0);
-	printf("Perceptron out\n");
+	printf("PERCEPTRON: Perceptron out\n");
 }
 
 int printOutput(int output[4]){
@@ -57,6 +57,9 @@ int printOutput(int output[4]){
 }
 
 void * threadablePerceptron(int x1[4], int x2[4], int T[4], int O[4], void * pid){
+	printf("THREADWRAPPER: Booting perceptron\n");
 	perceptron(x1, x2, T, O);
-	return pid;
+	printf("THREADWRAPPER: Closing thread %d\n", *(int*)pid);
+	//pthread_exit(NULL);
+	return NULL;
 }

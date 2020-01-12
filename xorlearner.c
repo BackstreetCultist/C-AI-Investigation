@@ -5,7 +5,7 @@
 //x1 XOR x2 == (x1 AND NOT x2) OR (x2 AND NOT x1)
 
 int main(int argc, char **argv){
-	pthread_t threads[2];
+	pthread_t nodes[2];
 	
 	//Inputs
 	int x1[4] = {1,1,0,0};
@@ -32,18 +32,18 @@ int main(int argc, char **argv){
 	printf("ENTERING HIDDEN LAYER -----------------\n");
 	
 	for(int i = 0; i < 2; i++){
-		printf("\nCreating node %d\n", i);
+		printf("\nLEARNER: Creating thread %d\n", i);
 		
 		switch(i){
 			case 0:
-				if (pthread_create(&threads[0], NULL, threadablePerceptron(x1, x2, t1, z1, (void *) &i), (void *) &i) == -1){
+				if (pthread_create(&nodes[i], NULL, threadablePerceptron(x1, x2, t1, z1, (void *) &i), (void *) &i) == -1){
 					printf("Creating thread %d failed\n", i);
 					exit(-1);
 				}
 				break;
 				
 			case 1:
-				if (pthread_create(&threads[0], NULL, threadablePerceptron(x1, x2, t2, z2, (void *) &i), (void *) &i) == -1){
+				if (pthread_create(&nodes[i], NULL, threadablePerceptron(x1, x2, t2, z2, (void *) &i), (void *) &i) == -1){
 					printf("Creating thread %d failed\n", i);
 					exit(-1);
 				}
@@ -53,10 +53,13 @@ int main(int argc, char **argv){
 				printf("You shouldn't see this message\n");
 				break;
 		}
+
+		printf("LEARNER: Continuing with loop\n");
 	}
+	printf("LEARNER: Proceeding to join threads\n");
 	
 	for(int i = 0; i < 2; i++){
-		pthread_join(threads[i], NULL);
+		pthread_join(nodes[i], NULL);
 	}
 	
 	printOutput(z1);
