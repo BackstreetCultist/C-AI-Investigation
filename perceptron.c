@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include "perceptron.h"
 
-int O[4] = {0,0,0,0};
-
-int * perceptron(int x1[4], int x2[4], int T[4]){
+void perceptron(int x1[4], int x2[4], int T[4], int O[4]){
 	int pass; //1 = pass, 0 = fail, reset to 1 each time
 	float y = 0.5;
 	float w1 = 0;
@@ -44,7 +42,7 @@ int * perceptron(int x1[4], int x2[4], int T[4]){
 		}
 		
 	} while (pass == 0);
-	return O;
+	printf("Perceptron out\n");
 }
 
 int printOutput(int output[4]){
