@@ -28,7 +28,7 @@ int * perceptron(int x1[4], int x2[4], int T[4]){
 			}
 			
 			//Print what just happened
-			printf("x1 = %d, x2 = %d, output = %d, target = %d\n", x1[i], x2[i], O[i], T[i]);
+			printf("x1 = %d,    x2 = %d,    output = %d,    target = %d\n", x1[i], x2[i], O[i], T[i]);
 			
 			//Adjust weights if there is an error
 			w1 = w1 + (LR * (T[i] - O[i]) * x1[i]);
