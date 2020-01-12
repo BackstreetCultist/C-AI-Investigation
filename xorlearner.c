@@ -32,10 +32,26 @@ int main(int argc, char **argv){
 	printf("ENTERING HIDDEN LAYER -----------------\n");
 	
 	for(int i = 0; i < 2; i++){
-		printf("\n Creating node %d\n", i);
-		if (pthread_create(&threads[0], NULL, perceptron(x1, x2, t1, z1), (void *) &i) == -1){
-			printf("Creating thread %d failed\n", i);
-			exit(-1);
+		printf("\nCreating node %d\n", i);
+		
+		switch(i){
+			case 0:
+				if (pthread_create(&threads[0], NULL, threadablePerceptron(x1, x2, t1, z1, (void *) &i), (void *) &i) == -1){
+					printf("Creating thread %d failed\n", i);
+					exit(-1);
+				}
+				break;
+				
+			case 1:
+				if (pthread_create(&threads[0], NULL, threadablePerceptron(x1, x2, t2, z2, (void *) &i), (void *) &i) == -1){
+					printf("Creating thread %d failed\n", i);
+					exit(-1);
+				}
+				break;
+				
+			default:
+				printf("You shouldn't see this message\n");
+				break;
 		}
 	}
 	
