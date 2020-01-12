@@ -2,6 +2,7 @@
 #include "perceptron.h"
 
 //x1 XOR x2 == (x1 AND NOT x2) OR (x2 AND NOT x1)
+
 int main(int argc, char **argv){
 	//Inputs
 	int x1[4] = {1,1,0,0};
@@ -12,14 +13,12 @@ int main(int argc, char **argv){
 	int t2[4] = {0,0,1,0};
 	
 	//Mid-stage outputs
-	int * z1Buffer;
 	int z1[4] = {0,0,0,0};
-	int * z2Buffer;
 	int z2[4] = {0,0,0,0};
 
 	
 	int T[4] = {0,0,0,0}; //Training value
-	int *O; //Output
+	int O[4] = {0,0,0,0}; //Output
 	
 	//Get CLI
 	for (int i = 1; i<argc; i++){
@@ -30,26 +29,18 @@ int main(int argc, char **argv){
 	printf("ENTERING HIDDEN LAYER -----------------\n");
 	
 	printf("\nFIRST NODE");
-	z1Buffer = perceptron(x1, x2, t1);
-	printOutput(z1Buffer);
-	//Parse buffer into main var
-	for (int i = 0; i<3; i++){
-		z1[i] = z1Buffer[i];
-	}
+	perceptron(x1, x2, t1, z1);
 	printOutput(z1);
 	
 	printf("\nSECOND NODE");
-	z2Buffer = perceptron(x1, x2, t2);
-	printOutput(z2Buffer);
-	//Parse buffer into main var
-	for (int i = 0; i<3; i++){
-		z2[i] = z2Buffer[i];
-	}
+	perceptron(x1, x2, t2, z2);
 	printOutput(z2);
-
-	printf("\nENTERING MAIN LAYER -----------------");
 	
-	O = perceptron(z1, z2, T);
+	
+	//Output Layer
+	printf("\nENTERING OUTPUT LAYER ---------------\n");
+	
+	perceptron(z1, z2, T, O);
 	printOutput(O);
 	
 	return 0;
