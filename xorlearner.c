@@ -14,6 +14,7 @@ int main(int argc, char **argv){
 	//Mid-stage outputs
 	int * z1;
 	int * z2;
+
 	
 	int T[4] = {0,0,0,0}; //Training value
 	int *O; //Output
@@ -24,13 +25,25 @@ int main(int argc, char **argv){
 	}
 	
 	//Hidden Layer
-	printf("\nENTERING HIDDEN LAYER -----------------\n");
-	printf("\nFIRST NODE\n");
+	printf("ENTERING HIDDEN LAYER -----------------\n");
+	
+	printf("\nFIRST NODE");
 	z1 = perceptron(x1, x2, t1);
-	printf("\nSECOND NODE\n");
+	printf("Returned: ");
+	for (int i = 0; i<4; i++){
+		printf("  %d  ", z1[i]);
+	}
+	printf("\n");
+	
+	printf("\nSECOND NODE");
 	z2 = perceptron(x1, x2, t2);
+	printf("Returned: ");
+	for (int i = 0; i<4; i++){
+		printf("  %d  ", z2[i]);
+	}
+	printf("\n");
 
-	printf("ENTERING MAIN LAYER -----------------\n");
+	printf("\nENTERING MAIN LAYER -----------------");
 	
 	O = perceptron(z1, z2, T);
 	
