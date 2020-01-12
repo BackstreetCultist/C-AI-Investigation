@@ -12,8 +12,10 @@ int main(int argc, char **argv){
 	int t2[4] = {0,0,1,0};
 	
 	//Mid-stage outputs
-	int * z1;
-	int * z2;
+	int * z1Buffer;
+	int z1[4] = {0,0,0,0};
+	int * z2Buffer;
+	int z2[4] = {0,0,0,0};
 
 	
 	int T[4] = {0,0,0,0}; //Training value
@@ -28,11 +30,21 @@ int main(int argc, char **argv){
 	printf("ENTERING HIDDEN LAYER -----------------\n");
 	
 	printf("\nFIRST NODE");
-	z1 = perceptron(x1, x2, t1);
+	z1Buffer = perceptron(x1, x2, t1);
+	printOutput(z1Buffer);
+	//Parse buffer into main var
+	for (int i = 0; i<3; i++){
+		z1[i] = z1Buffer[i];
+	}
 	printOutput(z1);
 	
 	printf("\nSECOND NODE");
-	z2 = perceptron(x1, x2, t2);
+	z2Buffer = perceptron(x1, x2, t2);
+	printOutput(z2Buffer);
+	//Parse buffer into main var
+	for (int i = 0; i<3; i++){
+		z2[i] = z2Buffer[i];
+	}
 	printOutput(z2);
 
 	printf("\nENTERING MAIN LAYER -----------------");
