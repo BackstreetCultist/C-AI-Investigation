@@ -46,3 +46,11 @@ int * perceptron(int x1[4], int x2[4], int T[4]){
 	} while (pass == 0);
 	return O;
 }
+
+int printOutput(int output[4]){
+	printf("Returned: ");
+	for (int i = 0; i<4; i++){
+		printf("  %d  ", output[i]);
+	}
+	printf("\n");
+}
