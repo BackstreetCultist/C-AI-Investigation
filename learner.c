@@ -12,11 +12,7 @@ int main(int argc, char **argv){
 	O = perceptron(x1,x2,T);
 	
 	//Printing
-	printf("Returned: ");
-	for (int i = 0; i<4; i++){
-		printf("  %d  ", O[i]);
-	}
-	printf("\n");
+	printOutput(O);
 	
 	
 	return 0;
