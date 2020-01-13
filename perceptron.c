@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "perceptron.h"
+#include <pthread.h>
 
 void perceptron(int x1[4], int x2[4], int T[4], int O[4]){
 	int pass; //1 = pass, 0 = fail, reset to 1 each time
@@ -7,6 +8,8 @@ void perceptron(int x1[4], int x2[4], int T[4], int O[4]){
 	float w1 = 0;
 	float w2 = 0;
 	double LR = 0.1;
+	
+	printf("PERCEPTRON: Perceptron in\n");
 	do {
 		pass = 1;
 		printf("\n\nNEW CYCLE\n");
@@ -42,7 +45,7 @@ void perceptron(int x1[4], int x2[4], int T[4], int O[4]){
 		}
 		
 	} while (pass == 0);
-	printf("Perceptron out\n");
+	printf("PERCEPTRON: Perceptron out\n");
 }
 
 int printOutput(int output[4]){
@@ -51,4 +54,12 @@ int printOutput(int output[4]){
 		printf("  %d  ", output[i]);
 	}
 	printf("\n");
+}
+
+void * threadablePerceptron(int x1[4], int x2[4], int T[4], int O[4], void * pid){
+	printf("THREADWRAPPER: Booting perceptron\n");
+	perceptron(x1, x2, T, O);
+	printf("THREADWRAPPER: Closing thread %d\n", *(int*)pid);
+	//pthread_exit(NULL);
+	return NULL;
 }
