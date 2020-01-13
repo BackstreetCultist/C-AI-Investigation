@@ -29,7 +29,7 @@ int main(int argc, char **argv){
 	}
 	
 	//Hidden Layer
-	printf("ENTERING HIDDEN LAYER -----------------\n");
+	printf("ENTERING HIDDEN LAYER ----------------------------------------\n");
 	
 	for(int i = 0; i < 2; i++){
 		printf("\nLEARNER: Creating thread %d\n", i);
@@ -67,7 +67,7 @@ int main(int argc, char **argv){
 	
 	
 	//Output Layer
-	printf("\nENTERING OUTPUT LAYER ---------------\n");
+	printf("\nENTERING OUTPUT LAYER --------------------------------------\n");
 	
 	perceptron(z1, z2, T, O);
 	printOutput(O);
