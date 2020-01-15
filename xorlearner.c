@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "perceptron.h"
 #include <pthread.h>
+#include <stdlib.h>
 
 //x1 XOR x2 == (x1 AND NOT x2) OR (x2 AND NOT x1)
 
@@ -36,14 +37,16 @@ int main(int argc, char **argv){
 		
 		switch(i){
 			case 0:
-				if (pthread_create(&nodes[i], NULL, threadablePerceptron(x1, x2, t1, z1, (void *) &i), (void *) &i) == -1){
+				if (pthread_create(&nodes[i], NULL, threadablePerceptron\
+					(x1, x2, t1, z1, (void *) &i), (void *) &i) == -1){
 					printf("Creating thread %d failed\n", i);
 					exit(-1);
 				}
 				break;
 				
 			case 1:
-				if (pthread_create(&nodes[i], NULL, threadablePerceptron(x1, x2, t2, z2, (void *) &i), (void *) &i) == -1){
+				if (pthread_create(&nodes[i], NULL, threadablePerceptron\
+					(x1, x2, t2, z2, (void *) &i), (void *) &i) == -1){
 					printf("Creating thread %d failed\n", i);
 					exit(-1);
 				}
@@ -58,9 +61,8 @@ int main(int argc, char **argv){
 	}
 	printf("LEARNER: Proceeding to join threads\n");
 	
-	for(int i = 0; i < 2; i++){
-		pthread_join(nodes[i], NULL);
-	}
+	pthread_join(nodes[0], NULL);
+	pthread_join(nodes[1], NULL);
 	
 	printOutput(z1);
 	printOutput(z2);
