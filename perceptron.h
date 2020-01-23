@@ -3,7 +3,7 @@
 
 void perceptron(int[], int[], int[], int[], int);
 
-void * threadablePerceptron(int[], int[], int[], int[], void *);
+void * threadablePerceptron(int[], int[], int[], int[], int, void *);
 int printOutput(int[]);
 
 #endif

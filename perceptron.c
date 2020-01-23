@@ -63,9 +63,9 @@ int printOutput(int output[4]){
 	printf("\n");
 }
 
-void * threadablePerceptron(int x1[4], int x2[4], int T[4], int O[4], void * pid){
+void * threadablePerceptron(int x1[4], int x2[4], int T[4], int O[4], int outputFlag, void * pid){
 	printf("THREADWRAPPER: Booting perceptron\n");
-	perceptron(x1, x2, T, O, 1);
+	perceptron(x1, x2, T, O, outputFlag);
 	printf("THREADWRAPPER: Closing thread %d\n", *(int*)pid);
 	//pthread_exit(NULL);
 	return NULL;
