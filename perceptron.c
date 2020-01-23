@@ -2,7 +2,8 @@
 #include "perceptron.h"
 #include <pthread.h>
 
-void perceptron(int x1[4], int x2[4], int T[4], int O[4]){
+void perceptron(int x1[4], int x2[4], int T[4], int O[4], int outputFlag){
+	//OutputFlag - If 1, suppress outputs
 	int pass; //1 = pass, 0 = fail, reset to 1 each time
 	float y = 0.5;
 	float w1 = 0;
@@ -12,13 +13,17 @@ void perceptron(int x1[4], int x2[4], int T[4], int O[4]){
 	printf("PERCEPTRON: Perceptron in\n");
 	do {
 		pass = 1;
-		printf("\n\nNEW CYCLE\n");
+		if (outputFlag != 1){
+			printf("\n\nNEW CYCLE\n");
+		}
 
 		//Loop through all target values
 		for (int i = 0; i<4; i++){
-			printf("Bias = %f\n", y);
-			printf("Weight 1 = %f\n", w1);
-			printf("Weight 2 = %f\n", w2);
+			if (outputFlag != 1){
+				printf("Bias = %f\n", y);
+				printf("Weight 1 = %f\n", w1);
+				printf("Weight 2 = %f\n", w2);
+			}
 
 			//Attempt to fire neuron
 			if (y <= (x1[i] * w1) + (x2[i] * w2) ){
@@ -29,7 +34,9 @@ void perceptron(int x1[4], int x2[4], int T[4], int O[4]){
 			}
 			
 			//Print what just happened
-			printf("x1 = %d,    x2 = %d,    output = %d,    target = %d\n", x1[i], x2[i], O[i], T[i]);
+			if (outputFlag != 1){
+				printf("x1 = %d,    x2 = %d,    output = %d,    target = %d\n", x1[i], x2[i], O[i], T[i]);
+			}
 			
 			//Adjust weights if there is an error
 			w1 = w1 + (LR * (T[i] - O[i]) * x1[i]);
@@ -58,7 +65,7 @@ int printOutput(int output[4]){
 
 void * threadablePerceptron(int x1[4], int x2[4], int T[4], int O[4], void * pid){
 	printf("THREADWRAPPER: Booting perceptron\n");
-	perceptron(x1, x2, T, O);
+	perceptron(x1, x2, T, O, 1);
 	printf("THREADWRAPPER: Closing thread %d\n", *(int*)pid);
 	//pthread_exit(NULL);
 	return NULL;
