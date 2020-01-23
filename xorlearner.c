@@ -13,7 +13,6 @@ int main(int argc, char **argv){
 		{1,1,0,0},
 		{1,0,1,0}
 	};
-
 	
 	//Mid-stage Targets
 	int ts[2][4] = {
@@ -26,7 +25,6 @@ int main(int argc, char **argv){
 		{0,0,0,0},
 		{0,0,0,0}
 	};
-
 	
 	int T[4] = {0,0,0,0}; //Training value
 	int O[4] = {0,0,0,0}; //Output
